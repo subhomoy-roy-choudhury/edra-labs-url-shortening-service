@@ -1,8 +1,7 @@
 from datetime import datetime
-from pydantic import BaseModel, Field
-from typing import List
-from utils import random_alias_string
 from collections import deque
+from pydantic import BaseModel, Field
+from typing import List, Optional
 
 class ShortenedURL(BaseModel):
     alias: str
@@ -14,7 +13,7 @@ class ShortenedURL(BaseModel):
 
 class CreateShortenURLRequest(BaseModel):
     long_url: str
-    custom_alias: str =  Field(default=random_alias_string(5))
+    custom_alias: Optional[str]
     ttl_seconds: int = Field(default=120)
 
 class CreateShortenURLResponse(BaseModel):
